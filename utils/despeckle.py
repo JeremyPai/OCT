@@ -115,44 +115,9 @@ class despeckle:
 
                     fixed = sitk.GetImageFromArray(center_image)
                     for index in range(each_side_average[0], each_side_average[1] + 1):
-
                         moving = sitk.GetImageFromArray(imagePowerStack[index])
-
-                        """""" """""" """""" """""" """""" """                
-                            Translation Registration
-                        
-                        """ """""" """""" """""" """""" """"""
-
-                        registration = sitk.ImageRegistrationMethod()
-                        registration.SetMetricAsMattesMutualInformation(24)
-                        registration.SetMetricSamplingPercentage(
-                            0.1, sitk.sitkWallClock
-                        )
-                        registration.SetMetricSamplingStrategy(registration.RANDOM)
-                        registration.SetOptimizerAsRegularStepGradientDescent(
-                            learningRate=1.0, minStep=0.001, numberOfIterations=150
-                        )
-                        registration.SetInitialTransform(
-                            sitk.TranslationTransform(fixed.GetDimension())
-                        )
-                        registration.SetInterpolator(sitk.sitkLinear)
-
-                        # only integers could be passed
-                        registration.SetShrinkFactorsPerLevel([9, 1, 1])
-
-                        registration.SetSmoothingSigmasPerLevel([1, 2, 1])
-
-                        outTx = registration.Execute(fixed, moving)
-
-                        resampler = sitk.ResampleImageFilter()
-                        resampler.SetReferenceImage(fixed)
-                        resampler.SetInterpolator(sitk.sitkBSplineResamplerOrder3)
-                        resampler.SetDefaultPixelValue(0)
-                        resampler.SetTransform(outTx)
-                        resultImage = resampler.Execute(moving)
-
+                        resultImage = self.translationRegistrationDenoise(fixed, moving)
                         resultImage = sitk.GetArrayFromImage(resultImage)
-
                         average_Bscan = average_Bscan + resultImage
 
                     average_Bscan = average_Bscan / (
@@ -173,3 +138,70 @@ class despeckle:
                     np.save(
                         "{}_image".format(num + 1), average_Bscan, allow_pickle=False
                     )
+
+    def translationRegistrationDenoise(self, fixed, moving):
+        registration = sitk.ImageRegistrationMethod()
+        registration.SetMetricAsMattesMutualInformation(24)
+        registration.SetMetricSamplingPercentage(0.1, sitk.sitkWallClock)
+        registration.SetMetricSamplingStrategy(registration.RANDOM)
+        registration.SetOptimizerAsRegularStepGradientDescent(
+            learningRate=1.0, minStep=0.001, numberOfIterations=150
+        )
+        registration.SetInitialTransform(
+            sitk.TranslationTransform(fixed.GetDimension())
+        )
+        # registration.SetInitialTransform(sitk.BSplineTransformInitializer(fixed, [2]*fixed.GetDimension()))
+        registration.SetInterpolator(sitk.sitkLinear)
+
+        # only integers could be passed
+        registration.SetShrinkFactorsPerLevel([9, 1, 1])
+
+        registration.SetSmoothingSigmasPerLevel([1, 2, 1])
+
+        outTx = registration.Execute(fixed, moving)
+
+        resampler = sitk.ResampleImageFilter()
+        resampler.SetReferenceImage(fixed)
+        resampler.SetInterpolator(sitk.sitkBSplineResamplerOrder3)
+        resampler.SetDefaultPixelValue(0)
+        resampler.SetTransform(outTx)
+
+        return resampler.Execute(moving)
+
+    def demonsRegistrationDenoise(self, fixed, moving):
+        demons = sitk.DemonsRegistrationFilter()
+        demons.SetNumberOfIterations(50)
+        demons.SetStandardDeviations([1, 2, 1])
+
+        displacementField = demons.Execute(fixed, moving)
+
+        outTx = sitk.DisplacementFieldTransform(displacementField)
+
+        resampler = sitk.ResampleImageFilter()
+        resampler.SetReferenceImage(fixed)
+        resampler.SetInterpolator(sitk.sitkBSplineResamplerOrder3)
+        resampler.SetDefaultPixelValue(0)
+        resampler.SetTransform(outTx)
+
+        return resampler.Execute(moving)
+
+    def simpleElastixDenoise(self, fixed, moving):
+        parameterMap = sitk.GetDefaultParameterMap("translation")
+        parameterMap["Spacing"] = ["9.44", "1"]
+        parameterMap["MaximumNumberOfSamplingAttempt"] = [
+            str(
+                int(
+                    image_power_stack[index].shape[0]
+                    * image_power_stack[index].shape[1]
+                    / 2
+                )
+            )
+        ]
+
+        elastixImageFilter = sitk.ElastixImageFilter()
+        elastixImageFilter.SetFixedImage(fixed)
+        elastixImageFilter.SetMovingImage(moving)
+        elastixImageFilter.SetParameterMap(parameterMap)
+        elastixImageFilter.Execute()
+
+        return elastixImageFilter.GetResultImage()
