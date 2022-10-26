@@ -23,6 +23,11 @@
             "numOfImages": 1000,
             "beginOfImages": 1,
             "endOfImages": 971
+        },
+        "despeckle": {
+            "filePath": "D:\\OCTImage",
+            "dirNameToSolve": "reconstructed",
+            "numOfAverage": 5
         }
     }
 }
