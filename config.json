@@ -1,0 +1,28 @@
+{
+    "process": {
+        "reconstructImage": {
+            "filePath": "D:\\OCTImage",
+            "backgroundPath": "D:\\OCTImage\\background",
+            "backgroundSubtraction": true,
+            "numOfBackground": 10,
+            "coeffOfSecondOrderDispersion": 0,
+            "numOfALines": 1000,
+            "window": [
+                [
+                    650,
+                    925
+                ],
+                [
+                    60,
+                    1000
+                ]
+            ],
+            "pixelOfRawData": 1024,
+            "pixelOfCropData": 0,
+            "pixelAfterZeroPadding": 1024,
+            "numOfImages": 1000,
+            "beginOfImages": 1,
+            "endOfImages": 971
+        }
+    }
+}
