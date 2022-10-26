@@ -67,8 +67,9 @@ class ReconstructImage:
                         OCT = OCT.astype(np.float64)
 
                         # background subtraction
-                        meanOfBackground = self.prepareBackground()
-                        OCT = np.subtract(OCT, meanOfBackground)
+                        if self.backgroundSubtraction == True:
+                            meanOfBackground = self.prepareBackground()
+                            OCT = np.subtract(OCT, meanOfBackground)
 
                         Bscan = np.zeros(
                             (self.pixelAfterZeroPadding, self.numOfALines)
@@ -184,14 +185,13 @@ class ReconstructImage:
         # dispersion = np.ones((self.pixelOfCropData), dtype=np.complex128)
         dispersion = np.ones((self.pixelOfRawData), dtype=np.complex128)
 
-        if self.coeffOfSecondOrderDispersion != 0:
-            for index in range(len(dispersion)):
-                temp = complex(
-                    0,
-                    self.coeffOfSecondOrderDispersion
-                    * (index / (len(dispersion) - 1)) ** 2,
-                )
-                dispersion[index] = np.exp(temp)
+        for index in range(len(dispersion)):
+            temp = complex(
+                0,
+                self.coeffOfSecondOrderDispersion
+                * (index / (len(dispersion) - 1)) ** 2,
+            )
+            dispersion[index] = np.exp(temp)
 
         return dispersion
 
