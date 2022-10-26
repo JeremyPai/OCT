@@ -28,6 +28,9 @@
             "filePath": "D:\\OCTImage",
             "dirNameToSolve": "reconstructed",
             "numOfAverage": 5
+        },
+        "preprocess": {
+            "filePath": "D:\\OCTImage"
         }
     }
 }
