@@ -10,10 +10,10 @@ from scipy.signal import hamming
     
     filePath: OCT 干涉訊號的路徑 (Single_offline data)
     
-    backgroundPath: background 的路徑，如果沒有要作減去 background 的處理，就將 background_subtraction 
+    backgroundPath: background 的路徑，如果沒有要作減去 background 的處理，就將 backgroundSubtraction 
                      設為 False
                      
-    numOfBackground: 有幾張 background，只有 background_subtraction = True 才需設定
+    numOfBackground: 有幾張 background，只有 backgroundSubtraction = True 才需設定
     
     coeffOfSecondOrderDispersion: 做色散補償時的參數，需依情況做調整
     
