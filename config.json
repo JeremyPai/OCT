@@ -31,6 +31,20 @@
         },
         "preprocess": {
             "filePath": "D:\\OCTImage"
+        },
+        "attenuation": {
+            "filePath": "D:\\Persion",
+            "intralipidPath": "D:\\intralipid",
+            "sensitivityPath": "D:\\sensitivity",
+            "confocalPath": "D:\\confocal",
+            "dirNameToSolve": "reconstructed",
+            "window": [
+                550,
+                825
+            ],
+            "refractionIndex": 1.38,
+            "pixelSize": 0.011,
+            "focalPlane": 91
         }
     }
 }
