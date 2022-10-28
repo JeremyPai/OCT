@@ -20,6 +20,7 @@ def AttentionResNet(
     inputs,
     layers=(3, 4, 6, 3),
     filters=(64, 128, 256, 512),
+    leaky_value=0,
     num_class=1000,
     initializer="glorot_uniform",
     l2_weight=0.05,
@@ -38,6 +39,7 @@ def AttentionResNet(
             x, residual = residual_unit(
                 x,
                 filters=filters[0],
+                leaky_value=leaky_value,
                 initializer=initializer,
                 regularizer=l2(l2_weight),
                 downsample=False,
@@ -51,6 +53,7 @@ def AttentionResNet(
             x, residual = residual_unit(
                 x,
                 filters=filters[0],
+                leaky_value=leaky_value,
                 initializer=initializer,
                 regularizer=l2(l2_weight),
                 downsample=False,
@@ -65,6 +68,7 @@ def AttentionResNet(
             x, residual = residual_unit(
                 x,
                 filters=filters[1],
+                leaky_value=leaky_value,
                 initializer=initializer,
                 regularizer=l2(l2_weight),
                 downsample=True,
@@ -78,6 +82,7 @@ def AttentionResNet(
             x, residual = residual_unit(
                 x,
                 filters=filters[1],
+                leaky_value=leaky_value,
                 initializer=initializer,
                 regularizer=l2(l2_weight),
                 downsample=False,
@@ -92,6 +97,7 @@ def AttentionResNet(
             x, residual = residual_unit(
                 x,
                 filters=filters[2],
+                leaky_value=leaky_value,
                 initializer=initializer,
                 regularizer=l2(l2_weight),
                 downsample=True,
@@ -105,6 +111,7 @@ def AttentionResNet(
             x, residual = residual_unit(
                 x,
                 filters=filters[2],
+                leaky_value=leaky_value,
                 initializer=initializer,
                 regularizer=l2(l2_weight),
                 downsample=False,
@@ -118,6 +125,7 @@ def AttentionResNet(
             feature_map = attention_block(
                 inputs=x,
                 filters=filters[2],
+                leaky_value=leaky_value,
                 initializer=initializer,
                 l2_weight=l2_weight,
                 model_name="attention_block_3",
@@ -131,6 +139,7 @@ def AttentionResNet(
             x, residual = residual_unit(
                 x,
                 filters=filters[2],
+                leaky_value=leaky_value,
                 initializer=initializer,
                 regularizer=l2(l2_weight),
                 downsample=False,
@@ -145,6 +154,7 @@ def AttentionResNet(
             x, residual = residual_unit(
                 x,
                 filters=filters[3],
+                leaky_value=leaky_value,
                 initializer=initializer,
                 regularizer=l2(l2_weight),
                 downsample=True,
@@ -157,6 +167,7 @@ def AttentionResNet(
             x, residual = residual_unit(
                 x,
                 filters=filters[3],
+                leaky_value=leaky_value,
                 initializer=initializer,
                 regularizer=l2(l2_weight),
                 downsample=False,
@@ -170,6 +181,7 @@ def AttentionResNet(
             feature_map = attention_block(
                 inputs=x,
                 filters=filters[3],
+                leaky_value=leaky_value,
                 initializer=initializer,
                 l2_weight=l2_weight,
                 model_name="attention_block_4",
@@ -183,6 +195,7 @@ def AttentionResNet(
             x, residual = residual_unit(
                 x,
                 filters=filters[3],
+                leaky_value=leaky_value,
                 initializer=initializer,
                 regularizer=l2(l2_weight),
                 downsample=False,
