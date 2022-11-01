@@ -203,3 +203,6 @@ class Train:
         print("training result...")
         print("loss: {:.4f}".format(loss))
         print("accuracy: {:.2f}%".format(100 * acc))
+
+    def get_batch_size(self):
+        return self.batch_size
