@@ -3,9 +3,7 @@
 This repo is a place to store the code which was written while I was in master degree.
 It mainly consist of two parts, which are OCT-related codes and DL-related codes.
 
-![OCT](https://github.com/JeremyPai/OCT/blob/master/image/OCT.PNG)
-
-
+![GradCAM_result](https://github.com/JeremyPai/OCT/blob/master/image/result.PNG)
 
 ## OCT Source Code:
 + image reconstruction
@@ -27,9 +25,6 @@ We also publish a paper related to this research.
 The main feature is that we are the first one to implement AttentionResNet and accomplish wonderful classification result on brain tumors.
 
 ![AttentionResNet](https://github.com/JeremyPai/OCT/blob/master/image/AttentionResNet.PNG)
-
-![GradCAM_result](https://github.com/JeremyPai/OCT/blob/master/image/result.PNG)
-
 
 
 ## Related Article
@@ -55,4 +50,4 @@ If you use any code in this repo, please kindly cite the following paper and enj
 
 ## Resource:
 + [Differentiation of primary central nervous system lymphoma from glioblastoma using optical coherence tomography based on attention ResNet](https://www.spiedigitallibrary.org/journals/neurophotonics/volume-9/issue-1/015005/Differentiation-of-primary-central-nervous-system-lymphoma-from-glioblastoma-using/10.1117/1.NPh.9.1.015005.full?SSO=1)
-+ [Optical Coherence Tomography: Technology and Applications](https://link.springer.com/referencework/10.1007/978-3-319-06419-2)
++ [Interpretability of Deep Learning Models with Tensorflow 2.0](https://www.sicara.fr/blog-technique/2019-08-28-interpretability-deep-learning-tensorflow)
