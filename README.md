@@ -7,8 +7,6 @@ It mainly consist of two parts, which are OCT-related codes and DL-related codes
     <img src="https://github.com/JeremyPai/OCT/blob/master/image/result.PNG">
 </p>
 
-![GradCAM_result](https://github.com/JeremyPai/OCT/blob/master/image/result.PNG)
-
 ## OCT Source Code:
 + image reconstruction
 + despeckle process
@@ -31,8 +29,6 @@ The main feature is that we are the first one to implement AttentionResNet and a
 <p align="center">
     <img src="https://github.com/JeremyPai/OCT/blob/master/image/AttentionResNet.PNG">
 </p>
-
-![AttentionResNet](https://github.com/JeremyPai/OCT/blob/master/image/AttentionResNet.PNG)
 
 
 ## Related Article
