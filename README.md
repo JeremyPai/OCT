@@ -3,6 +3,10 @@
 This repo is a place to store the code which was written while I was in master degree.
 It mainly consist of two parts, which are OCT-related codes and DL-related codes.
 
+<p align="center">
+    <img src="https://github.com/JeremyPai/OCT/blob/master/image/result.PNG">
+</p>
+
 ![GradCAM_result](https://github.com/JeremyPai/OCT/blob/master/image/result.PNG)
 
 ## OCT Source Code:
@@ -23,6 +27,10 @@ It mainly consist of two parts, which are OCT-related codes and DL-related codes
 We also publish a paper related to this research. 
 
 The main feature is that we are the first one to implement AttentionResNet and accomplish wonderful classification result on brain tumors.
+
+<p align="center">
+    <img src="https://github.com/JeremyPai/OCT/blob/master/image/AttentionResNet.PNG">
+</p>
 
 ![AttentionResNet](https://github.com/JeremyPai/OCT/blob/master/image/AttentionResNet.PNG)
 
